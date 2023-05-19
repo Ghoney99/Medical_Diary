@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42cd96a0da9b1e79c98fcbab4a817360&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42cd96a0da9b1e79c98fcbab4a817360&libraries=services,geometry"></script>
     <style>
         .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
         .wrap * {padding: 0;margin: 0;}
@@ -25,10 +25,10 @@
 
 </head>
 <body>
-    <div id="map" style="width:100%;height:700px;"></div>
-
-    
-
-    <script src = "map.js"></script>
+    <div>
+        <div id="map" style="width:70%;height:700px; float: left;"></div>
+        <button id="goToCurrentPositionBtn">현재 위치로 이동</button>
+    </div>
+    <script src = "map2.js"></script>
 </body>
 </html>
