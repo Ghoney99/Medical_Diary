@@ -20,26 +20,61 @@
         .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
         .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
         .info .link {color: #5085BB;}
+
+        .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        }
+
+        .data-table thead {
+        background-color: #f2f2f2;
+        }
+
+        .data-table th {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px; /* 글자 크기 설정 */
+        height: 20px;
+        }
+
+        .data-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px; /* 글자 크기 설정 */
+        height: 20px;
+        }
+
+        .data-table tr:nth-child(odd) {
+        background-color: #f9f9f9;
+        }
+
+        .data-table tr:hover {
+        background-color: #e6e6e6;
+        }
+
     </style>
     <title>Document</title>
 
 </head>
 <body>
     <div>
-        <div id="map" style="width:70%;height:700px; float: left;"></div>
-        <div id="buttons">
-            <button onclick="searchData('current')">가까운 수거함</button>
-            <button onclick="searchData('중구')">중구</button>
-            <button onclick="searchData('남구')">남구</button>
-            <button onclick="searchData('달서구')">달서구</button>
-            <button onclick="searchData('달성군')">달성군</button>
-            <button onclick="searchData('동구')">동구</button>
-            <button onclick="searchData('북구')">북구</button>
-            <button onclick="searchData('서구')">서구</button>
-            <button onclick="searchData('수성구')">수성구</button>
+        <div id="map" style="width:60%;height:700px; float: left;"></div>
+        <div style="width:40%;height:700px; float: right; overflow:scroll;">
+            <div id="buttons">
+                <button onclick="searchData('current')">가까운 수거함</button>
+                <button onclick="searchData('중구')">중구</button>
+                <button onclick="searchData('남구')">남구</button>
+                <button onclick="searchData('달서구')">달서구</button>
+                <button onclick="searchData('달성군')">달성군</button>
+                <button onclick="searchData('동구')">동구</button>
+                <button onclick="searchData('북구')">북구</button>
+                <button onclick="searchData('서구')">서구</button>
+                <button onclick="searchData('수성구')">수성구</button>
+            </div>
+            <table id="data-table"></table>
+            
         </div>
-        <table id="data-table"></table>
-
     </div>
     <script src = "medicineBox.js"></script>
 </body>

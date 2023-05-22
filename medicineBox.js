@@ -235,13 +235,15 @@ function searchData(area) {
 }
 
 
-
 function displayData(data) {
   // 데이터 테이블 요소에 대한 참조 가져오기
   const table = document.getElementById('data-table');
 
   // 테이블 초기화
   table.innerHTML = '';
+
+  // 테이블에 CSS 클래스 추가
+  table.classList.add('data-table');
 
   // 헤더 행 생성
   const headerRow = document.createElement('tr');
@@ -280,6 +282,7 @@ function displayData(data) {
     table.appendChild(row);
   });
 }
+
 
 
 // 두 지점 사이의 거리 계산 함수
