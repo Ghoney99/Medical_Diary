@@ -35,26 +35,66 @@
 - Build Tool: Gradle
 - API: 카카오 맵 API, 공공 데이터 포털 API
 
-## 프로젝트 구조
+
+## 엔티티 관계도 (ERD)
 
 ```
-src
-├── main
-│   ├── java
-│   │   └── com
-│   │       └── project
-│   │           └── teamproject
-│   │               ├── controller
-│   │               ├── createForm
-│   │               ├── domain
-│   │               │   ├── entity
-│   │               │   └── repository
-│   │               └── service
-│   └── resources
-│       ├── static
-│       └── templates
-└── test
++----------------+        +---------------+
+|  CalendarEntity |        |   UserEntity  |
++----------------+        +---------------+
+| medicineId: int |        | id: String    |
+| id: String      |        | pw: String    |
+| medicine: String|        | name: String  |
+| startdate: Date |        | location: bool|
+| finishdate: Date|        +---------------+
+| detail1: boolean|                |
+| detail2: boolean|                |
+| detail3: boolean|                |
+| detail4: boolean|                |
+| detail5: boolean|                |
+| memo: String    |                |
++----------------+                |
+         |                        |
+         |                        |
+         |        +---------------+
+         |        |   NewsEntity  |
+         |        +---------------+
+         |        | title: String |
+         |        | link: String  |
+         |        | summary: String|
+         |        | image: String |
+         |        +---------------+
+         |
+         |
+    (관계: 1 User to Many Calendars)
 ```
+
+### 엔티티 설명
+
+1. **CalendarEntity**: 사용자의 의약품 복용 일정을 관리합니다.
+   - `medicineId`: 의약품 일정의 고유 식별자
+   - `id`: 사용자 ID (UserEntity와 연결)
+   - `medicine`: 의약품 이름
+   - `startdate` & `finishdate`: 복용 시작일과 종료일
+   - `detail1` ~ `detail5`: 복용 상세 정보 (예: 아침, 점심, 저녁 복용 여부)
+   - `memo`: 추가 메모
+
+2. **UserEntity**: 사용자 정보를 관리합니다.
+   - `id`: 사용자의 고유 식별자
+   - `pw`: 비밀번호
+   - `name`: 사용자 이름
+   - `location`: 위치 정보 사용 동의 여부
+
+3. **NewsEntity**: 의료 관련 뉴스 정보를 저장합니다.
+   - `title`: 뉴스 제목
+   - `link`: 뉴스 원문 링크
+   - `summary`: 뉴스 요약
+   - `image`: 뉴스 관련 이미지 URL
+
+### 관계
+- 한 명의 사용자(UserEntity)는 여러 개의 의약품 일정(CalendarEntity)을 가질 수 있습니다. (1:N 관계)
+- NewsEntity는 독립적으로 존재하며, 모든 사용자에게 공통으로 제공됩니다.
+
 
 ## 주요 클래스 설명
 
