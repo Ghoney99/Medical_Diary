@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .notShow{
+            display: none;
+        }
+    </style>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/js/scriptCalDelete.js"></script>
+    <link rel="stylesheet" href="/css/showCalendar.css">
+    <link rel="stylesheet" href="/css/calendarStyle.css">
+</head>
+<body>
+        <div id="divMedicineInfo">
+        <button type="button" id="btnExit" onclick="location.href='/calendar/'"> X </button>
+            <table id="tableShowCalendar" th:each="data:${data}">
+                <p id="tempPShowCalendar" style="display: none" th:text="${data.medicineId}"></p>
+                <tbody>
+                <tr>
+                    <th>약</th>
+                    <td id="tdShowCalendar1" th:text="${data.medicine}"></td>
+                    <td id="tdUpdateCalendar1" class="notShow"><input type="text" th:value="${data.medicine}" id="updateCalendarMedicine"></td>
+                </tr>
+                <tr>
+                    <th>시작 날짜</th>
+                    <td id="tdShowCalendar2" th:text="${data.startdate}"></td>
+                    <td id="tdUpdateCalendar2" class="notShow"><input type="date" th:value="${data.startdate}" id="dateUpdateCalendarStartdate"></td>
+                </tr>
+                <tr>
+                    <th>끝 날짜</th>
+                    <td id="tdShowCalendar3" th:text="${data.finishdate}"></td>
+                    <td id="tdUpdateCalendar3" class="notShow"><input type="date" th:value="${data.finishdate}" id="dateUpdateCalendarFinishdate"></td>
+                </tr>
+                <tr>
+                    <th>언제</th>
+                    <td id="tdShowCalendar4"></td>
+                    <td id="tdUpdateCalendar4" class="notShow">
+                        <label for="checkboxUpdateCalendarDetail1">아침</label>
+                        <input type="checkbox" id="checkboxUpdateCalendarDetail1" value="checkboxUpdateCalendarDetail1">
+                        <label for="checkboxUpdateCalendarDetail2">점심</label>
+                        <input type="checkbox" id="checkboxUpdateCalendarDetail2" value="checkboxUpdateCalendarDetail2">
+                        <label for="checkboxUpdateCalendarDetail3">저녁</label>
+                        <input type="checkbox" id="checkboxUpdateCalendarDetail3" value="checkboxUpdateCalendarDetail3">
+                        <label for="checkboxUpdateCalendarDetail4">식전 30분</label>
+                        <input type="checkbox" id="checkboxUpdateCalendarDetail4" value="checkboxUpdateCalendarDetail4">
+                        <label for="checkboxUpdateCalendarDetail5">식후 30분</label>
+                        <input type="checkbox" id="checkboxUpdateCalendarDetail5" value="checkboxUpdateCalendarDetail5">
+                    </td>
+                </tr>
+                <tr>
+                    <th rowspan="2">메모</th>
+                    <td id="tdShowCalendar5" th:text="${data.memo}"></td>
+                    <td id="tdUpdateCalendar5" class="notShow">
+                        <textarea id="textareaUpdateCalendarMemo" th:text="${data.memo}" rows="2" cols="30" maxlength="250"></textarea>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td id="tdMedicine" style="visibility: hidden;"></td>
+                    <td id="tdMedicineId" style="visibility: hidden;"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                    <td colspan="2">
+                        <button type="button" id="btnShowCalendarDelete" onclick="deleteCalendar()">삭제</button>
+                        <button type="button" id="btnShowCalendarUpdate" onclick="updateCalendar()">수정</button>
+                        <button type="button" id="btnShowCalendarUpdateFinish" onclick="updateCalendarFinish()" class="notShow">완료</button>
+                    </td>
+                
+                </tfoot>
+                <script th:inline="javascript">
+                    var val = [[${data}]];
+
+                    let text = ""
+                    if(val.detail1) text+="아침 "
+                    if(val.detail2) text+="점심 "
+                    if(val.detail3) text+="저녁  "
+                    if(val.detail4) text+="식전 30분 "
+                    if(val.detail5) text+="식후 30분"
+                    document.getElementById("tdShowCalendar4").innerHTML = text
+
+                    let num = val.medicineId
+                    let med = val.medicine
+                    document.getElementById("tdMedicineId").innerHTML = num
+                    document.getElementById("tdMedicine").innerHTML = med
+                </script>
+                <script>
+                    function updateCalendar(){
+                        document.getElementById("tdUpdateCalendar1").classList.remove("notShow")
+                        document.getElementById("tdUpdateCalendar2").classList.remove("notShow")
+                        document.getElementById("tdUpdateCalendar3").classList.remove("notShow")
+                        document.getElementById("tdUpdateCalendar4").classList.remove("notShow")
+                        document.getElementById("tdUpdateCalendar5").classList.remove("notShow")
+
+                        document.getElementById("tdShowCalendar1").classList.add("notShow")
+                        document.getElementById("tdShowCalendar2").classList.add("notShow")
+                        document.getElementById("tdShowCalendar3").classList.add("notShow")
+                        document.getElementById("tdShowCalendar4").classList.add("notShow")
+                        document.getElementById("tdShowCalendar5").classList.add("notShow")
+
+                        document.getElementById("btnShowCalendarDelete").classList.add("notShow")
+                        document.getElementById("btnShowCalendarUpdate").classList.add("notShow")
+                        document.getElementById("btnShowCalendarUpdateFinish").classList.remove("notShow")
+                    }
+
+                    function updateCalendarFinish(){
+                        var conf = confirm("수정하시겠습니까?")
+                        if(conf==true){
+                            let newMedicine = document.getElementById("updateCalendarMedicine").value
+                            let newStartdate = document.getElementById("dateUpdateCalendarStartdate").value
+                            let newFinishdate = document.getElementById("dateUpdateCalendarFinishdate").value
+                            let newDetail1 = document.getElementById("checkboxUpdateCalendarDetail1").checked
+                            let newDetail2 = document.getElementById("checkboxUpdateCalendarDetail2").checked
+                            let newDetail3 = document.getElementById("checkboxUpdateCalendarDetail3").checked
+                            let newDetail4 = document.getElementById("checkboxUpdateCalendarDetail4").checked
+                            let newDetail5 = document.getElementById("checkboxUpdateCalendarDetail5").checked
+                            let newMemo = document.getElementById("textareaUpdateCalendarMemo").value
+                            let thisMedicineId = document.getElementById("tdMedicineId").innerHTML
+                            let thisMedicine = document.getElementById("tdMedicine").innerHTML
+
+                            location.replace("/calendar/show/"+thisMedicineId+"/?name="+thisMedicine+"&medicine="+newMedicine+"&startdate="+newStartdate+"&finishdate="+newFinishdate+"&detail1="+newDetail1+"&detail2="+newDetail2+"&detail3="+newDetail3+"&detail4="+newDetail4+"&detail5="+newDetail5+"&memo="+newMemo)
+                        }
+                    }
+                </script>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

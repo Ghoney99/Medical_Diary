@@ -1,0 +1,279 @@
+/*================================*/
+/*Calendar.html*/
+/*================================*/
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
+@import url("/css/header.css");
+@import url("/css/rootStyle.css");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  background-color: var(--c-ash);
+}
+
+
+button {
+    font: inherit;
+    line-height: 1;
+    background-color: var(--c-white);
+    border: 2px solid var(--c-indigo);
+    color: var(--c-indigo);
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    &:hover,
+    &:focus {
+      background-color: var(--c-indigo);
+      color: var(--c-white);
+    }
+  }
+
+.divCalendarWrap{
+    width: 90%;
+    margin: 60px auto;
+    overflow: hidden;
+}
+
+#divCalendar{
+    min-width: 320px;
+    background-color: var(--c-titan-white);
+    float:left;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px var(--c-cold-purple);
+
+}
+#divCalendarInfo, #divMedicineInfo{ 
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px var(--c-cold-purple);
+    min-width: 320px;
+    height: 550px;
+    position: relative;
+    background-color: #d1deff;
+    text-align: center;
+    padding-bottom: 10px;
+}
+#tableProfile{
+    margin: 2rem auto;
+    font-size: 1.3em;
+}
+#tableProfile{
+
+    width:80%;
+    margin: 4em auto;
+    font-size: 1.3em;
+    
+}
+#divMedicineInfo{
+    width: 80%;
+    margin: 2em auto;
+}
+#tableShowCalendar{
+    background-color: #FFFFFF;
+    width:80%;
+    margin: 4em auto;
+    font-size: 1.3em;
+    
+}
+#tableShowCalendar th{
+    background-color: var(--c-titan-white);
+    width: 40%;
+    height: max-content;
+}
+#tableShowCalendar tr{
+    width:80%;
+    height: fit-content;
+}
+#tableShowCalendar td{
+    height: fit-content;
+}
+
+
+#divCalendarInfo table, #tableProfileToday{
+    width: 96%;
+    min-width: 320px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+#btnExit{
+    margin: 1em;
+
+
+}
+#divCalendarInfoYear, #divCalendarInfoDate{
+    text-align: center;
+}
+
+
+
+/* 달력 테이블 ------------------- */
+#tableCalendar{
+    margin: 2em auto;
+    padding: 1rem ;
+    width: 90%;
+    min-width: 320px;
+    height: fit-content;
+    table-layout: fixed;
+}
+#tableCalendar th{
+    font-size: 1.4em;
+}
+#tableCalendar button{
+    width: fit-content;
+    height: fit-content;
+    font-size: 3em;
+    font-weight: bold;
+    -webkit-transition: color 0.6s;
+    transition: color 0.6s;
+    border: solid 4px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    background-color: #37474f;
+    text-align: center;
+    vertical-align: middle;
+}
+#tableCalendar button::before{
+    content: '';
+    box-shadow: inset 0 0 0 35px #37474f;
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+    transform: scale3d(0.9, 0.9, 1);
+    -webkit-transition: box-shadow 0.6s, -webkit-transform 0.6s;
+    transition: box-shadow 0.6s, transform 0.6s;
+}
+#tableCalendar button:hover{
+    color: #37474F;
+    background: none;
+}
+#tableCalendar button:hover::before{
+    box-shadow: inset 0 0 0 2px #37474f;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+}
+/**/
+#tableCalendar tbody td{
+    cursor: pointer;
+    text-align: center;
+    height: 3em;
+    font-size: 1.5em;
+    margin: 5em;
+}
+.calYearTd{
+    font-size: 2em;
+    text-align: center;
+}
+.calMonthTd{
+    text-align: center;
+}
+.calDayTh{
+    height: 4em;
+}
+#calMonth{
+    font-size: 4em;
+}
+.choiceDay{
+    color: #FFFFFF;
+    background-color: #37474F;
+    padding: 4px 6px 4px 6px;
+    border-radius: 50px;
+    font-weight: bold;
+    border: solid 4px #37474F;
+    text-decoration-color: #FFFFFF !important;
+}
+.today{
+    text-decoration: underline #37474F solid 4px;
+    padding: 4px 6px 4px 6px;
+}
+.sunday{
+    color: #DE4040 !important;
+    border-radius: 50px;
+    padding: 4px 6px 4px 6px;
+}
+.saturday{
+    color: #406DDE !important;
+    border-radius: 50px;
+    padding: 4px 6px 4px 6px;
+}
+
+
+
+
+/* 달력 날짜 선택시 추가 정보 ------------- */
+#divCalendarInfo h3{
+    font-size: 15pt;
+}
+#divCalendarInfo h2 {
+    font-size: 25pt;
+}
+#divCalendarInfo table thead{
+    width: 100%;
+    padding: 5px;
+    background-color: var(--c-titan-white);
+}
+#divCalendarInfo table td{
+    padding: 5px;
+
+    
+}
+
+.wrapper{
+    width: 80%;
+}
+/* 선택 날짜에 따른 의약품 목록 보이기 ----- */
+.notShow{
+    display: none;
+}
+
+.show{
+    display: contents !important;
+}
+
+.modal{
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    width: 90%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+@media screen and (max-width: 735px){
+    #divCalendar{
+        width: 100%;
+        margin: 2em auto;
+        margin-top: 6em;
+        font-size: 1em;
+        
+    }
+    #divCalendarInfo{ 
+        width: 100%;
+        margin: 2em auto;
+        float: inline-end;
+    }  
+}
+  
+  
+   @media screen and (min-width: 736px) {
+
+    #divCalendar{
+        margin: 2em auto;
+        width:45%;
+
+    }
+    #divCalendarInfo{ 
+        margin: 2em auto;
+        width: 45%;
+        float: right;
+    }  
+    }

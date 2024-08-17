@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/css/calendarStyle.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+    <script src="/js/scriptCalMonthChange.js"></script>
+    <title>Calendar</title>
+</head>
+<body>
+<div class="divCalendarWrap">
+    <header class="top_bar">
+        <script src="/js/includeHTML.js"></script>
+        <td><button id="btnHomeToLogin" sec:authorize="isAnonymous()" type="button" onclick="location.href='/user/login'">로그인</button>
+            <button id="btnHomeToSignup" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/user/logout'">로그아웃</button></t>
+        
+    </th>
+   </table>
+    </header>
+
+    <div id="divCalendar">
+        <table id="tableCalendar" >
+            <thead>
+                <tr>
+                    <td colspan="7" class="calYearTd"><span id="calYear"></span></td>
+                </tr>
+                <tr>
+                    <td onclick="calPrev();"><button>&#60;</button></td>
+                    <td colspan="5" class="calMonthTd"><span id="calMonth"></span></td>
+                    <td onclick="calNext();"><button>&#62;</button></td>
+                </tr>
+                <tr class="calDayTh">
+                    <th>SUN</th>
+                    <th>MON</th>
+                    <th>TUE</th>
+                    <th>WED</th>
+                    <th>THU</th>
+                    <th>FRI</th>
+                    <th>SAT</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="divCalendarInfoWrap">
+        <div id="divCalendarInfo" sec:authorize="isAuthenticated()">
+
+                <h3 id="divCalendarInfoYear"></h3>
+                <h2 id="divCalendarInfoDate"></h2>
+
+                <table id="tableCalendarInfo">
+                    <thead>
+                    <tr>
+                        <th>Medicine</th>
+                        <th>Period</th>
+                        <th></th>
+                        <th>아침</th>
+                        <th>점심</th>
+                        <th>저녁</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <p id="pCalendarTempDate" style="display: none">0000-00-00</p>
+                    <p id="pCalendarTempNumber" style="display: none">0</p>
+                    <tr th:each="medicine:${medicines}" th:if="${medicine.id}==${#authentication.name}">
+                        <script id="scriptAddRow" th:inline="javascript">
+                            var val = [[${medicine}]];
+                            var num = Number(document.getElementById("pCalendarTempNumber").innerText)
+    
+                            var table = document.getElementById("tableCalendarInfo")
+                            var newRow = table.insertRow()
+    
+                            var giveId = "tr"+num
+                            newRow.setAttribute("id",giveId)
+                            newRow.setAttribute("class","notShow")
+                            num = num+1
+                            document.getElementById("pCalendarTempNumber").innerHTML = num
+    
+                            var cell0 = newRow.insertCell()
+                            var cell1 = newRow.insertCell()
+                            var cell2 = newRow.insertCell()
+                            var cell3 = newRow.insertCell()
+                            var cell4 = newRow.insertCell()
+                            var cell5 = newRow.insertCell()
+                            var cell6 = newRow.insertCell()
+                            var cell7 = newRow.insertCell()
+                            var cell8 = newRow.insertCell()
+    
+                            cell0.innerHTML = val.medicine
+                            cell1.innerHTML = val.startdate
+                            cell2.innerHTML = val.finishdate
+    
+                            if(val.detail1) cell3.innerHTML = "v"
+                            else cell3.innerHTML = " "
+                            if(val.detail2) cell4.innerHTML = "v"
+                            else cell4.innerHTML = " "
+                            if(val.detail3) cell5.innerHTML = "v"
+                            else cell5.innerHTML = " "
+                            if(val.detail4) cell6.innerHTML = "식전 30분"
+                            else cell6.innerHTML = " "
+                            if(val.detail5) cell7.innerHTML = "식후 30분"
+                            else cell7.innerHTML = " "
+                            cell8.insertAdjacentHTML("afterbegin", "<td><button type=\"button\" id=\"addBtn\" onclick=\"location.href='/calendar/show/"+val.medicineId+"'\"> > </button></td>")
+                        </script>
+                    </tr>
+                    </tbody>
+                </table> 
+                    <button id="btnAdd" type="button" onclick="location.href='/calendar/add'">ADD</button>
+              <!--             <script>
+                var modal=document.getElementById('myModal');
+                var openbtn=document.getElementById('addBtn');
+                openbtn.onclick=function(){
+                    modal.style.display="block";
+                }
+             </script>-->
+
+
+
+           
+        </div>
+    </div>
+</div>
+</body>
+</html>

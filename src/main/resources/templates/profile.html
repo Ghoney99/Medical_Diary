@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        .notShow{
+            display: none;
+        }
+    </style>
+	<link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/calendarStyle.css">
+</head>
+<body>
+    <div class="container">
+        <header class="top_bar">
+            <script src="/js/includeHTML.js"></script>
+            <td><button id="btnHomeToLogin" sec:authorize="isAnonymous()" type="button" onclick="location.href='/user/login'">로그인</button>
+                <button id="btnHomeToSignup" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/user/logout'">로그아웃</button></t>
+            
+        </th>
+       </table>
+        </header>
+        <div>
+    <h1 style="margin: 0 auto; text-align: center; position: relative;">마이페이지</h1>
+    <div id="divMedicineInfo">
+        <table id="tableProfile">
+            <br>
+            <tbody 
+            
+            th:each="user:${users}" th:if="${user.id}==${#authentication.name}">
+            <script id="scriptShowProfile" th:inline="javascript">
+                let val = [[${user}]]
+                var table = document.getElementById("tableProfile")
+                let id = val.id
+                let name = val.name
+    
+                var newRow0 = table.insertRow()
+                newRow0.setAttribute("id","trName")
+    
+                var cell0 = newRow0.insertCell()
+                var cell1 = newRow0.insertCell()
+                var cell2 = newRow0.insertCell()
+                cell0.setAttribute("id","tdName")
+
+                cell0.insertAdjacentHTML("afterbegin","name <button id=\"tdBtnProfileUpdate1\" type=\"button\" onclick=updateName()>수정</button><button id=\"tdBtnProfileUpdate2\" type=\"button\" onclick=updateNameFinish()>완료</button>")
+    
+                var newRow1 = table.insertRow()
+                newRow1.setAttribute("id","trInput")
+    
+                var cell3 = newRow1.insertCell()
+                // cell3.setAttribute("id","tdInput")
+                cell3.insertAdjacentHTML("afterbegin","<input type=\"text\" id=\"tdInputProfile\" class=\"notShow\">")
+    
+                var newRow2 = table.insertRow()
+                newRow2.setAttribute("id","trId")
+    
+                var cell4 = newRow2.insertCell()
+                cell4.setAttribute("id","tdId")
+                cell4.innerHTML = id
+            </script>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <h3>TODAY</h3>
+        <p> 오늘 복용해야할 약 목록입니다.</p>
+        <hr>
+        <table id="tableProfileToday">
+            <tbody>
+            <tr th:each="medicine:${medicines}" th:if="${medicine.id}==${#authentication.name}">
+                <script id="scriptShowProfileToday" th:inline="javascript">
+                    var val2 = [[${medicine}]]
+                    var d1 = new Date(val2.startdate)
+                    var d2 = new Date(val2.finishdate)
+                    var dToday = new Date()
+                    var dToday_1 = dToday.getFullYear()+"-"+("0"+(1+dToday.getMonth())).slice(-2)+"-"+("0"+ dToday.getDate()).slice(-2)
+                    var dt = new Date(dToday_1)
+    
+                    if((d1<=dt)&&(dt<=d2)){
+                        var table2 = document.getElementById("tableProfileToday")
+                        var medicineId = val2.medicineId
+    
+                        var newRow2 = table2.insertRow()
+                        var cell = newRow2.insertCell()
+                        cell.innerHTML = val2.medicine
+                        cell.setAttribute("onclick","location.href=\"/calendar/show/"+medicineId+"\"")
+                        cell.setAttribute("style","cursor:pointer;")
+                    }
+                </script>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+
+    <script>
+        document.getElementById("tdInputProfile").classList.add("notShow")
+        document.getElementById("tdBtnProfileUpdate2").classList.add("notShow")
+        document.getElementById("tdBtnProfileUpdate1").classList.remove("notShow")
+    </script>
+    <script>
+        function updateName(){
+            let f = document.getElementById("tdBtnProfileUpdate2")
+            console.log(f.classList)
+            document.getElementById("tdInputProfile").classList.remove("notShow")
+            document.getElementById("tdBtnProfileUpdate2").classList.remove("notShow")
+            document.getElementById("tdBtnProfileUpdate1").classList.add("notShow")
+        }
+
+        function updateNameFinish(){
+            var conf = confirm("이름을 수정하시겠습니까?")
+            if(conf==true){
+                let id = document.getElementById("tdId").innerText
+                let name = document.getElementById("tdName").innerText
+                let newName = document.getElementById("tdInputProfile").value
+
+                location.replace("/profile/update/?id="+id+"&name="+name+"&newName="+newName)
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>웹다이어리</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<title>웹다이어리</title>
+        <link rel="stylesheet" href="assets/css/login.css" />
+        <link rel="stylesheet" href="assets/css/background.css" />
+		<script src = "assets\js\userState.js"></script>
+		<script src="https://developers.kakao.com/sdk/js/kakao.js"></script><!-- 카카오 로그인 -->
+		<script src="assets\js\kakao-login.js"></script> <!-- 외부 JavaScript 파일 로드 -->
+    
+    </head>
+	<body>
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+						<a href="home.html" class="logo">
+							<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">웹 다이어리</span>
+						</a>
+
+					<!-- Nav -->
+						<nav>
+							<ul>
+								<li><a href="#menu">Menu</a></li>
+							</ul>
+						</nav>
+
+				</div>
+			</header>
+
+		<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="home.html" id="menuLink">Home</a></li>
+					<li><a href="login.html" id="menuLink">로그인</a></li>
+					<li><a href="diary.html" id="menuLink">다이어리</a></li>
+					<li><a href="pharmacy.html" id="menuLink">약국찾기</a></li>
+					<li><a href="medicineBox.html" id="menuLink">폐의약품 수거함찾기</a></li>
+					<li><a href="manager chat.html" id="menuLink">1:1관리자채팅</a></li>
+				</ul>
+				<!-- 카카오 로그아웃 버튼 -->
+				<a id="kakao-login-btn" href="javascript:logoutFromKakao()" style="position: fixed; bottom: 10px; left: 4%;">
+					<img style="width: 50px, hegiht 50px;"src="images\logout.png"/>
+				</a>
+				<p style="position: fixed; bottom: 0; right: 10%;" id="user-info"></p>	<!-- 로그인 정보 -->
+			</nav>
+
+            <!-- 본문 -->
+            <div style="  display: flex; justify-content: center;">
+                <div class="login-wrapper">
+                    <h2 style="  font-size: 24px; color: #6A24FE; margin-bottom: 20px;">Login</h2>
+                    <form method="post" action="서버의url" id="login-form">
+                        <input type="text" name="userName" placeholder="Email">
+                        <input type="password" name="userPassword" placeholder="Password">
+                        <label for="remember-check">
+                            <input type="checkbox" id="remember-check">아이디 저장하기
+                        </label>
+                        <input type="submit" value="Login">
+                        <input type="submit" style="background-color:#f9e000; color:black" value="Kako Login" onclick="javascript:loginWithKakao()"
+                    </form>
+                            <!-- 카카오 로그인 버튼
+                            <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+                                <img src="images\kakao_login.png"/>
+                            </a> -->
+                            <ul class="find_wrap" id="find_wrap">
+            
+                                <li><a target="_blank" href=""
+                                       class="find_text">비밀번호 찾기</a></li>
+                                <li><a target="_blank" href=""
+                                       class="find_text">아이디 찾기</a></li>
+                                <li><a target="_blank" href="" class="find_text">회원가입</a>
+                                </li>
+                            </ul>
+                </div>
+
+            </div>
+
+	</div>
+
+<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>

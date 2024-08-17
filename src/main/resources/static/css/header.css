@@ -1,0 +1,118 @@
+@import url("/css/rootStyle.css");
+
+.top_bar{
+    background:var(--c-cold-purple);
+    position:fixed;
+    left:0;top: 0;right:0;
+
+    width: 100%;
+    justify-content: space-between;
+    vertical-align: auto;
+    margin-bottom: 100px;
+    z-index: 100;
+    text-align: center;
+}
+.top_bar table{
+  margin: 1rem auto;
+  font-size: 1.2em;
+}
+.top_bar th>td{
+  display: inline-block;
+
+}
+.dropdown{
+
+    background:var(--c-cold-purple);
+    position:relative;
+    display: inline-block;
+}
+.dropdown-content{
+  display:none;
+  position:absolute;
+  background-color: var(--c-cold-purple);
+  min-width: 75px;
+  padding:5px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0 0.2);
+}
+.dropdown-content a{
+  color:black;
+  padding: 8px;
+  display: block;
+
+}
+
+header{
+  display: block;
+}
+
+
+
+#btnHome,#btnHomeToCalendar, #btnHomeToMedicineBox, #btnHomeToPharmacy, #btnHomeToChat,#btnMyPage{
+    margin: 0.1rem 1.5rem;
+    height: fit-content;
+    color: var(--c-white);
+    &:hover,
+    &:focus {
+      color: var(--c-governor);
+      font-style: bold ;
+      text-align: center;
+    }
+    
+}
+#btnHomeToLogin,#btnHomeToSignup{
+    font: inherit;
+    line-height: 1;
+    margin: 0.1rem auto;
+    background-color: var(--c-white);
+    border: 2px solid var(--c-indigo);
+    color: var(--c-indigo);
+    padding: 5px;
+    border-radius: 6px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    &:hover,
+    &:focus {
+      background-color: var(--c-indigo);
+      color: var(--c-white);
+    }
+  }
+
+  @media screen and (max-width: 735px){
+    .top_bar{
+      height: fit-content;
+    }
+   /*
+    .top_bar button,a{
+      visibility: hidden;
+    }
+     #menu{float: left;
+      margin: 2em;
+      visibility: visible;
+    }
+    */
+    }
+  
+  
+   @media screen and (min-width: 736px) {
+    header{
+      font-size: 1.2em;
+      margin: 1em,auto;
+    }
+    body{
+      font-size: 14px;
+    }
+    .top_bar{
+      height: 6rem;
+    }
+    h3{
+      font-size: 2em;
+    }
+   /*
+    #menu{
+      visibility: hidden;
+    }
+  */
+    }

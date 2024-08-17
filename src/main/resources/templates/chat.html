@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        .accordion {
+            margin: 5px auto;
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.3em;
+            transition: 0.4s;
+        }
+
+        .accordion:hover {
+            background-color: #ccc;
+        }
+        .accordion:focus{
+            background-color: #a69fd6;
+        }
+
+        .panel {
+            padding: 0 18px;
+            margin: auto;
+            display: none;
+            width: 90%;
+            background-color: white;
+            overflow: hidden;
+            font-size: 1.2em;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/header.css">    
+    <link rel="stylesheet" href="/css/button.css">
+    <link rel="stylesheet" href="/css/rootStyle.css">
+    
+
+</head>
+<body>
+    <div class="container">
+            <header class="top_bar">
+                <script src="/js/includeHTML.js"></script>
+                <td><button id="btnHomeToLogin" sec:authorize="isAnonymous()" type="button" onclick="location.href='/user/login'">로그인</button>
+                    <button id="btnHomeToSignup" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/user/logout'">로그아웃</button></t>
+                
+            </th>
+        </table>
+            </header>
+        
+        <div>
+            <h1>Q&A Categories</h1>
+            <header class="top_bar">
+                <script src="/js/includeHTML.js"></script>
+                <td><button id="btnHomeToLogin" sec:authorize="isAnonymous()" type="button" onclick="location.href='/user/login'">로그인</button>
+                    <button id="btnHomeToSignup" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/user/logout'">로그아웃</button></t>
+                
+            </th>
+           </table>
+            </header>
+            <div style="margin: 0 auto;">
+                <button class="accordion">회원 정보</button>
+                <div class="panel">
+                    <ul>
+                        <li>
+                            <strong>Q: 회원가입은 어떻게 하나요?</strong>
+                            <p>A: 회원가입을 위해서는 홈페이지 우측 상단에 있는 '회원 가입' 버튼을 클릭하고 필요한 정보를 입력하세요.</p>
+                        </li>
+
+                    </ul>
+                </div>
+            
+                <button class="accordion">약국</button>
+                <div class="panel">
+                    <ul>
+                        <li>
+                            <strong>Q: 주변 약국을 어떻게 찾을 수 있나요?</strong>
+                            <p>A: 저희 애플리케이션에서는 사용자의 위치 정보를 활용하여 주변 약국을 자동으로 찾아줍니다. 약국 찾기 페이지에서 주변 약국을 확인할 수 있습니다.</p>
+                        </li>
+                        <li>
+                            <strong>Q: 약국의 운영시간은 어떻게 확인할 수 있나요?</strong>
+                            <p>A: 약국 정보에는 약국의 운영시간이 포함되어 있습니다. 약국 찾기 페이지에서 원하는 약국을 지도에서 클릭하면 운영시간을 확인할 수 있습니다.</p>
+                        </li>
+                        <li>
+                            <strong>Q: 약국의 전화번호는 어디에서 확인할 수 있나요?</strong>
+                            <p>A: 약국 찾기 페이지에서 원하는 약국을 지도에서 클릭하면 전화번호를 확인할 수 있습니다.</p>
+                        </li>
+                    </ul>
+                </div>
+            
+                <button class="accordion">폐의약품</button>
+                <div class="panel">
+                    <ul>
+                        <li>
+                            <strong>Q: 수거함을 어떻게 찾을 수 있나요?</strong>
+                            <p>A: 폐의약품 수거함 찾기에서 수거함 위치를 확인하실 수 있습니다.</p>
+                        </li>
+                        <li>
+                            <strong>Q: 수거함이 있는 지역은 어디인가요?</strong>
+                            <p>A: 대구 지역에서만 제공됩니다. 사용자의 위치에 따라 수거함이 있는 지역을 확인할 수 있습니다.</p>
+                        </li>
+                    </ul>
+                </div>
+            
+                <button class="accordion">달력</button>
+                <div class="panel">
+                    <ul>
+                        <li>
+                            <strong>Q: 달력에 의약품과 메모를 어떻게 입력하나요?</strong>
+                            <p>A: 달력 탭에서 원하는 날짜를 선택하고, 입력창을 통해 의약품과 메모를 입력할 수 있습니다. 입력한 내용은 해당 날짜에 기록되어 표시됩니다.</p>
+                        </li>
+                        <li>
+                            <strong>Q: 약 복용에 관련된 유의사항은 어디에서 확인할 수 있나요?</strong>
+                            <p>A: 의약품 정보 입력 시 제품의 안내문이나 약사의 지시사항을 참고하여 복용에 관련된 유의사항을 확인하실 수 있습니다.</p>
+                        </li>
+                    </ul>
+                </div>
+            
+                <button class="accordion">기타</button>
+                <div class="panel">
+                    <ul>
+                        <li>
+                            <strong>Q: 관리자와의 1:1 채팅을 어떻게 시작할 수 있나요?</strong>
+                            <p>A: 1:1 채팅을 원하신다면, QnA 게시판의 하단에 위치한 버튼을 클릭하여 질문을 입력하면 관리자와 채팅을 시작할 수 있습니다.</p>
+                        </li>
+                    </ul>
+                </div>
+                <script src=/js/scriptChat.js></script>
+                </div>
+           </div>
+    </div>
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+</body>
+</html>

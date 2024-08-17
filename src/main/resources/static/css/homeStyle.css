@@ -1,0 +1,39 @@
+/*================================*/
+/*home.html*/
+/*================================*/
+@import url("/css/header.css");
+@import url("/css/rootStyle.css");
+
+@media screen and (max-width: 735px){
+    header{
+      font-size: 1.2em;
+      margin: 1em,auto;
+    }
+    body{
+      font-size: 10px;
+    }
+    .top_bar{
+      height: fit-content;
+    }
+    h3{
+      font-size: 1.2em;
+    }
+    }
+  
+  
+   @media screen and (min-width: 736px) {
+    header{
+      font-size: 1.2em;
+      margin: 1em,auto;
+    }
+    body{
+      font-size: 14px;
+    }
+    .top_bar{
+      height: 6rem;
+    }
+    h3{
+      font-size: 2em;
+    }
+    }
+  

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42cd96a0da9b1e79c98fcbab4a817360&libraries=services,geometry"></script>
+    <script src = "assets\js\userState.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script><!-- 카카오 로그인 -->
+    <script src="assets\js\kakao-login.js"></script> <!-- 외부 JavaScript 파일 로드 -->
+    <style>
+        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+        .wrap * {padding: 0;margin: 0;}
+        .wrap .info {width: 286px;height: 300px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+        .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+        .info .close:hover {cursor: pointer;}
+        .info .body {position: relative;overflow-x: hidden;overflow-y: scroll;}
+        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+        .info .link {color: #5085BB;}
+
+        .data-table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        }
+
+        .data-table thead {
+        background-color: #f2f2f2;
+        }
+
+        .data-table th {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px; /* 글자 크기 설정 */
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        }
+
+        .data-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px; /* 글자 크기 설정 */
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        }
+
+        .data-table tr:nth-child(odd) {
+        background-color: #f9f9f9;
+        }
+
+        .data-table tr:hover {
+        background-color: #e6e6e6;
+        }
+
+        .data-table th:nth-child(1), .data-table td:nth-child(1) {
+        width: 20%;  /* 첫번째 열의 너비를 지정합니다. */
+        }
+
+        .data-table th:nth-child(2), .data-table td:nth-child(2) {
+        width: 45%;  /* 두번째 열의 너비를 지정합니다. */
+        }
+
+        .data-table th:nth-child(3), .data-table td:nth-child(3) {
+        width: 20%;  /* 세번째 열의 너비를 지정합니다. */
+        }
+
+        .data-table th:nth-child(4), .data-table td:nth-child(4) {
+        width: 15%;  /* 네번째 열의 너비를 지정합니다. */
+        }
+
+        @media screen and (max-width: 735px){
+            .container {
+                position: relative; 
+            }
+            #map{
+                width:100%;height:240px; position:fixed;
+            }
+            #mBoxList {
+                width: 100%;
+                height: calc(100vh - 240px);
+                position: fixed;
+                top: 380px;
+                overflow-y: scroll;
+            }
+        }
+        @media screen and (min-width: 736px) {
+            .container {
+                display: flex; justify-content: center; margin-bottom: 5%; position: static;
+            }
+            #map{
+                width:44%;height:700px; float: left
+            }
+            #mBoxList{
+                width:45%;height:700px; float: right; overflow:scroll; margin-left: 1%;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="assets/css/background.css" />
+    <title>폐의약품 수거함 찾기</title>
+
+</head>
+<body>
+     <!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+						<a href="home.html" class="logo">
+							<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">웹 다이어리</span>
+						</a>
+
+					<!-- Nav -->
+						<nav>
+							<ul>
+								<li><a href="#menu">Menu</a></li>
+							</ul>
+						</nav>
+
+				</div>
+			</header>
+
+		<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="home.html" id="menuLink">Home</a></li>
+					<li><a href="login.html" id="menuLink">로그인</a></li>
+					<li><a href="diary.html" id="menuLink">다이어리</a></li>
+					<li><a href="pharmacy.html" id="menuLink">약국찾기</a></li>
+					<li><a href="medicineBox.html" id="menuLink">폐의약품 수거함찾기</a></li>
+					<li><a href="manager chat.html" id="menuLink">1:1관리자채팅</a></li>
+				</ul>
+				<!-- 카카오 로그아웃 버튼 -->
+				<a id="kakao-login-btn" href="javascript:logoutFromKakao()" style="position: fixed; bottom: 10px; left: 4%;">
+					<img style="width: 50px, hegiht 50px;"src="images\logout.png"/>
+				</a>
+				<p style="position: fixed; bottom: 0; right: 10%;" id="user-info"></p>	<!-- 로그인 정보 -->
+			</nav>
+        </div>
+
+    <div class="container">
+        <div id="map"></div>
+        <div id="mBoxList">
+            <div id="buttons" >
+                <button class="button district" onclick="searchData('current')">가까운 수거함</button>
+                <button class="button district" onclick="searchData('중구')">중구</button>
+                <button class="button district" onclick="searchData('남구')">남구</button>
+                <button class="button district" onclick="searchData('달서구')">달서구</button>
+                <button class="button district" onclick="searchData('달성군')">달성군</button>
+                <button class="button district" onclick="searchData('동구')">동구</button>
+                <button class="button district" onclick="searchData('북구')">북구</button>
+                <button class="button district" onclick="searchData('서구')">서구</button>
+                <button class="button district" onclick="searchData('수성구')">수성구</button>
+            </div>
+            <table id="data-table"></table>
+        </div>
+    </div>
+  <script src = assets/js/scriptMedicineBox.js></script>
+      <!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>

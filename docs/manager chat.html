@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42cd96a0da9b1e79c98fcbab4a817360&libraries=services,geometry"></script>
+    <script src = "assets\js\userState.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script><!-- 카카오 로그인 -->
+    <script src="assets\js\kakao-login.js"></script> <!-- 외부 JavaScript 파일 로드 -->
+    <style>
+      .chat_wrap { border:1px solid #999; width:80%; padding:5px; font-size:13px; color:#333; margin:0 auto}
+      .chat_wrap .inner{background-color:#acc2d2; border-radius:5px; padding:10px; overflow-y:scroll; height: 600px;}
+      .chat_wrap .item{margin-top:15px}
+      .chat_wrap .item:first-child{margin-top:0px}
+      .chat_wrap .item .box{display:inline-block; max-width:180px; position:relative}
+      .chat_wrap .item .box::before{content:""; position:absolute; left:-8px; top:9px; border-top:0px solid transparent; border-bottom:8px solid transparent;border-right:8px solid #fff;}
+      .chat_wrap .item .box .msg {background:#fff; border-radius:10px; padding:8px; text-align:left; word-break: break-word;}
+      .chat_wrap .item .box .time {font-size:11px; color:#999; position:absolute; right: -75px; bottom:5px; width:70px}
+      .chat_wrap .item.mymsg{text-align:right}
+      .chat_wrap .item.mymsg .box::before{left:auto; right:-8px; border-left:8px solid #fee600; border-right:0;}
+      .chat_wrap .item.mymsg .box .msg{background:#fee600}
+      .chat_wrap .item.mymsg .box .time{right:auto; left:-75px}
+      .chat_wrap .item .box{transition:all .3s ease-out; margin:0 0 0 20px;opacity:0}
+      .chat_wrap .item.mymsg .box{transition:all .3s ease-out; margin:0 20px 0 0;}
+      .chat_wrap .item.on .box{margin:0; opacity: 1;}
+      
+  
+      input[type="text"]{border:0; width:87%;background:#ddd; border-radius:5px; height:30px; padding-left:5px; box-sizing:border-box; margin-top:5px}
+      input[type="text"]::placeholder{color:#999}
+      input[type="button"]{border:0;width: 10%;background:#fee600 ;border-radius: 5px; height: 30px; padding-left:5px; margin-top: 5px; float:right}
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+        
+        .container {
+          max-width: 500px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        
+        h1 {
+          text-align: center;
+          margin-top: 0;
+        }
+        
+        form {
+          margin-top: 20px;
+        }
+        
+        .form-group {
+          margin-bottom: 20px;
+        }
+        
+        .form-group label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        
+        .form-group textarea {
+          height: 150px;
+        }
+        
+        .form-group input[type="submit"] {
+          background-color: #6A24FE;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        .form-group input[type="submit"]:hover {
+          background-color: #4D1AAB;
+        }
+      </style>
+    <link rel="stylesheet" href="assets/css/background.css" />
+    <title>1대1 관리자 문의</title>
+
+</head>
+<body>
+     <!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+						<a href="home.html" class="logo">
+							<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">웹 다이어리</span>
+						</a>
+
+					<!-- Nav -->
+						<nav>
+							<ul>
+								<li><a href="#menu">Menu</a></li>
+							</ul>
+						</nav>
+
+				</div>
+			</header>
+
+		<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="home.html" id="menuLink">Home</a></li>
+					<li><a href="login.html" id="menuLink">로그인</a></li>
+					<li><a href="diary.html" id="menuLink">다이어리</a></li>
+					<li><a href="pharmacy.html" id="menuLink">약국찾기</a></li>
+					<li><a href="medicineBox.html" id="menuLink">폐의약품 수거함찾기</a></li>
+					<li><a href="manager chat.html" id="menuLink">1:1관리자채팅</a></li>
+				</ul>
+				<!-- 카카오 로그아웃 버튼 -->
+				<a id="kakao-login-btn" href="javascript:logoutFromKakao()" style="position: fixed; bottom: 10px; left: 4%;">
+					<img style="width: 50px, hegiht 50px;"src="images\logout.png"/>
+				</a>
+				<p style="position: fixed; bottom: 0; right: 10%;" id="user-info"></p>	<!-- 로그인 정보 -->
+			</nav>
+        
+        <!-- 본문 -->
+        <div style=" display: flex; justify-content: center; margin-left: 5%; margin-right: 5%; margin-bottom: 10%;">
+            <div class="chat_wrap">
+              <div class="inner">
+                  
+                 
+              </div>
+          
+              <input type="text" class="mymsg" placeholder="mymsg 내용 입력">
+              <input type="button" class="enter" value="보내기">
+              <input type="text" class="msg" placeholder="msg내용 입력">
+              <input type="button" value="보내기">
+              <!--지금 바로 위에 msg 보내기 버튼이 동작을 안하는데 이유를 모르겠어서... 테스트용으로 만들어둔거고 나중에 지울거긴 해요 엔터치는건 됨!-->
+          </div>
+          </body>
+    </div>
+      <!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/main.js"></script>
+  <script>
+    $(function press_enter(){
+        $("input[type='text']").keypress(function(e){
+            //여기서부터 말풍선추가 
+            if(e.keyCode == 13 && $(this).val().length){
+                var _val = $(this).val();
+                var _class = $(this).attr("class");
+                $(this).val('');
+                var _tar = $(".chat_wrap .inner").append('<div class="item '+_class+'"><div class="box"><p class="msg">'+_val+'</p><span class="time">'+currentTime()+'</span></div></div>');
+
+                var lastItem = $(".chat_wrap .inner").find(".item:last");
+                setTimeout(function(){
+                    lastItem.addClass("on");
+                },10);
+
+                var position = lastItem.position().top + $(".chat_wrap .inner").scrollTop();
+                console.log(position);
+
+                $(".chat_wrap .inner").stop().animate({scrollTop:position},500);
+            }
+        });
+
+
+    });
+    $(function click_send(){
+        $("input[type='button']").on('click',function(e){
+            if( $("input[type='text']").val().length){
+                var _val = $("input[type='text']").val();
+                var _class =$("input[type='text']").attr("class");
+                $("input[type='text']").val('');
+                var _tar = $(".chat_wrap .inner").append('<div class="item '+_class+'"><div class="box"><p class="msg">'+_val+'</p><span class="time">'+currentTime()+'</span></div></div>');
+
+                var lastItem = $(".chat_wrap .inner").find(".item:last");
+                setTimeout(function(){
+                    lastItem.addClass("on");
+                },10);
+
+                var position = lastItem.position().top + $(".chat_wrap .inner").scrollTop();
+                console.log(position);
+
+                $(".chat_wrap .inner").stop().animate({scrollTop:position},500);
+            }
+        })
+    }); 
+    
+    var currentTime = function(){
+        var date = new Date();
+        var hh = date.getHours();
+        var mm = date.getMinutes();
+        var apm = hh >12 ? "오후":"오전";
+        var ct = apm + " "+hh+":"+mm+"";
+        return ct;
+    }
+
+</script>
+
+
+
+</body>
+</html>

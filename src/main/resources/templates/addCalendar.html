@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="/js/scriptCalDelete.js"></script>
+        <link rel="stylesheet" href="/css/calendarStyle.css">
+    </head>
+<body>
+    <div id="divMedicineInfo">
+        <h1>약품 추가</h1>
+
+    <form th:action="@{/calendar/add}" th:object="${calendarCreateForm}" method="POST">
+        
+        <table id="tableShowCalendar">
+        <input type="hidden" id="id" class="addForm" name="id" th:value="${#authentication.name}">
+
+        <tr><th><label for="medicine">Medicine</label></th><td><input type="text" th:field="*{medicine}" id="medicine" class="addForm" name="medicine"></td></tr>
+        <tr><th><label for="startdate">시작 날짜</label></th><td><input type="date" th:field="*{startdate}" id="startdate" class="addForm"></td>
+        <tr><th><label for="finishdate">끝 날짜</label></th><td><input type="date" th:field="*{finishdate}" id="finishdate" class="addForm"></td>
+        <tr><th>복용방법</th><label for="detail1"><td>아침</label><input type="checkbox" th:field="*{detail1}" id="detail1" name="detail" value="detail1" class="addForm">
+        <label for="detail2">점심</label><input type="checkbox" th:field="*{detail2}" id="detail2" name="detail" value="detail2" class="addForm">
+        <label for="detail3">저녁</label><input type="checkbox" th:field="*{detail3}" id="detail3" name="detail" value="detail3" class="addForm"><br>
+        <label for="detail4">식전 30분</label><input type="checkbox" th:field="*{detail4}" id="detail4" name="detail" value="detail4" class="addForm">
+        <label for="detail5">식후 30분</label><input type="checkbox" th:field="*{detail5}" id="detail5" name="detail" value="detail5" class="addForm"></td></tr>
+        <tr><th><label for="medicine">메모</label></th><td><textarea th:field="*{memo}" rows="2" cols="30" maxlength="250"></textarea></td></tr>
+
+        <tfoot><td colspan="2"><button type="submit">추가</button>
+        <button type="button" onclick="location.href='/calendar/'">취소</button>
+        </td>    </tfoot>
+
+    </table>
+    </form>
+</div>
+</body>
+</html>

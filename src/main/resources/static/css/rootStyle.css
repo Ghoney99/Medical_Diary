@@ -1,0 +1,99 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css); 
+
+
+:root {
+
+    --c-white: #fff;
+    --c-lightgray: #e2e2e2;
+    font-size: 62.5%;
+    
+    --c-titan-white: #f1eeff;
+    --c-cold-purple: #a69fd6;
+    --c-indigo: #6558d3;
+    --c-governor: #4133B7;
+    font-family: 'Noto Sans KR', sans-serif;
+
+  }
+button{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    line-height: 1;
+    background-color: var(--c-white);
+    border: 2px solid var(--c-indigo);
+    color: var(--c-indigo);
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    display: inline-block;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    &:hover,
+    &:focus {
+      background-color: var(--c-indigo);
+      color: var(--c-white);
+    }
+
+  }
+#buttons button{
+  font-size: 1.2em
+}
+
+  .container{
+    width: 80%;
+    margin: 60px auto;
+    padding: 10px;
+
+}
+a{
+  display: block;
+}
+
+
+.wrapper{
+    width: auto;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 735px){
+  header{
+    font-size: 1em;
+    margin: 1em,auto;
+  }
+  body{
+    font-size: 10px;
+  }
+  .top_bar{
+    height: fit-content;
+  }
+  h3{
+    font-size: 1.2em;
+  }
+  h4{
+    font-size: 1.1em;
+  }
+
+  
+  }
+
+
+
+
+
+ @media screen and (min-width: 736px) {
+  header{
+    font-size: 1.2em;
+    margin: 1em,auto;
+  }
+  body{
+    font-size: 14px;
+  }
+  .top_bar{
+    height: 6rem;
+  }
+  h3{
+    font-size: 2em;
+  }
+
+  }

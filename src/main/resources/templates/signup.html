@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Sign Up</title>
+</head>
+<body>
+
+    <header class="top_bar">
+        <script src="/js/includeHTML.js"></script>
+        <td><button id="btnHomeToLogin" sec:authorize="isAnonymous()" type="button" onclick="location.href='/user/login'">로그인</button>
+            <button id="btnHomeToSignup" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/user/logout'">로그아웃</button></t>
+        
+    </th>
+   </table>
+    </header>
+    <h1>Sign Up</h1>
+    <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post" >
+        <label for="id"></label><input type="text" th:field="*{id}" class="signupForm" placeholder="ID"><br>
+        <label for="pw"></label><input type="text" th:field="*{pw}" class="signupForm" placeholder="PW"><br>
+        <label for="name"></label><input type="text" th:field="*{name}" class="signupForm" placeholder="이름"><br>
+        <button type="submit" class="sign__up">가입</button>
+    </form>
+</body>
+</html>
